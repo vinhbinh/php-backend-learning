@@ -13,8 +13,17 @@ class Router
             return;
         }
      
+        // if ($uri === '/user' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+        //     require_once __DIR__ . '/../controllers/UserController.php';
+        //     (new UserController())->index();
+        //     return;
+        // }
+
         if ($uri === '/user' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            require_once __DIR__ . '/AuthMiddleware.php';
             require_once __DIR__ . '/../controllers/UserController.php';
+
+            AuthMiddleware::handle();
             (new UserController())->index();
             return;
         }
